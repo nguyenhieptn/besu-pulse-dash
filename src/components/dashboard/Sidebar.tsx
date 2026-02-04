@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Home, Server, Users, ArrowLeftRight, Settings, Activity } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 interface SidebarProps {
@@ -8,14 +9,21 @@ interface SidebarProps {
 }
 
 const navItems = [
-  { id: 'home', icon: Home, label: 'Dashboard' },
-  { id: 'nodes', icon: Server, label: 'Nodes' },
-  { id: 'users', icon: Users, label: 'Users' },
-  { id: 'transactions', icon: ArrowLeftRight, label: 'Transactions' },
-  { id: 'settings', icon: Settings, label: 'Settings' },
+  { id: 'home', icon: Home, label: 'Dashboard', path: '/' },
+  { id: 'nodes', icon: Server, label: 'Nodes', path: '/nodes' },
+  { id: 'users', icon: Users, label: 'Users', path: '/users' },
+  { id: 'transactions', icon: ArrowLeftRight, label: 'Transactions', path: '/transactions' },
+  { id: 'settings', icon: Settings, label: 'Settings', path: '/settings' },
 ];
 
 export const Sidebar = ({ activeItem = 'home', onItemClick }: SidebarProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = (item: typeof navItems[0]) => {
+    onItemClick?.(item.id);
+    navigate(item.path);
+  };
+
   return (
     <motion.aside
       initial={{ x: -80, opacity: 0 }}
@@ -47,7 +55,7 @@ export const Sidebar = ({ activeItem = 'home', onItemClick }: SidebarProps) => {
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.1 * (index + 1) }}
-              onClick={() => onItemClick?.(item.id)}
+              onClick={() => handleClick(item)}
               className={cn(
                 'w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 group relative',
                 isActive
