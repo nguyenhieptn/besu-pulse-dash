@@ -16,13 +16,11 @@ const generateSparkline = () => {
 };
 
 export const NetworkHeartbeat = ({ stats }: NetworkHeartbeatProps) => {
-  const [glowKey, setGlowKey] = useState(0);
   const [sparklineData, setSparklineData] = useState(generateSparkline);
   const [prevBlock, setPrevBlock] = useState(stats.currentBlock);
 
   useEffect(() => {
     if (stats.currentBlock !== prevBlock) {
-      setGlowKey(prev => prev + 1);
       setPrevBlock(stats.currentBlock);
       setSparklineData(prev => [...prev.slice(1), { value: stats.avgBlockTime }]);
     }
@@ -70,11 +68,11 @@ export const NetworkHeartbeat = ({ stats }: NetworkHeartbeatProps) => {
 
         return (
           <motion.div
-            key={`${card.id}-${glowKey}`}
+            key={card.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className={`glass-card p-5 ${card.hasGlow && card.id === 'block' ? 'block-counter-glow' : ''}`}
+            className="glass-card p-5"
           >
             <div className="flex items-start justify-between mb-3">
               <div
