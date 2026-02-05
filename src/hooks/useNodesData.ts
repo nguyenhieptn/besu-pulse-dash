@@ -76,7 +76,7 @@ const initialNodes: NetworkNode[] = [
     enodeUrl: 'enode://abc123...@192.168.1.10:30303',
     metrics: { cpu: 45, ram: 62, disk: 15, peersHistory: generatePeersHistory() },
     config: '',
-    position: { x: 100, y: 150 },
+    position: { x: 50, y: 200 },
   },
   {
     id: 'validator-2',
@@ -89,7 +89,7 @@ const initialNodes: NetworkNode[] = [
     enodeUrl: 'enode://def456...@192.168.1.11:30303',
     metrics: { cpu: 52, ram: 58, disk: 18, peersHistory: generatePeersHistory() },
     config: '',
-    position: { x: 350, y: 50 },
+    position: { x: 200, y: 50 },
   },
   {
     id: 'validator-3',
@@ -102,7 +102,59 @@ const initialNodes: NetworkNode[] = [
     enodeUrl: 'enode://ghi789...@192.168.1.12:30303',
     metrics: { cpu: 0, ram: 0, disk: 22, peersHistory: [] },
     config: '',
-    position: { x: 350, y: 250 },
+    position: { x: 200, y: 350 },
+  },
+  {
+    id: 'validator-4',
+    name: 'Validator-04',
+    role: 'Validator',
+    status: 'Active',
+    ipAddress: '192.168.1.13',
+    clientVersion: 'Besu/v24.1.0',
+    uptime: '12d 8h 15m',
+    enodeUrl: 'enode://pqr111...@192.168.1.13:30303',
+    metrics: { cpu: 38, ram: 45, disk: 20, peersHistory: generatePeersHistory() },
+    config: '',
+    position: { x: 400, y: 50 },
+  },
+  {
+    id: 'validator-5',
+    name: 'Validator-05',
+    role: 'Validator',
+    status: 'Active',
+    ipAddress: '192.168.1.14',
+    clientVersion: 'Besu/v24.1.0',
+    uptime: '10d 2h 30m',
+    enodeUrl: 'enode://stu222...@192.168.1.14:30303',
+    metrics: { cpu: 42, ram: 55, disk: 25, peersHistory: generatePeersHistory() },
+    config: '',
+    position: { x: 400, y: 350 },
+  },
+  {
+    id: 'validator-6',
+    name: 'Validator-06',
+    role: 'Validator',
+    status: 'Syncing',
+    ipAddress: '192.168.1.15',
+    clientVersion: 'Besu/v24.1.0',
+    uptime: '2d 5h 10m',
+    enodeUrl: 'enode://vwx333...@192.168.1.15:30303',
+    metrics: { cpu: 75, ram: 68, disk: 12, peersHistory: generatePeersHistory() },
+    config: '',
+    position: { x: 600, y: 100 },
+  },
+  {
+    id: 'validator-7',
+    name: 'Validator-07',
+    role: 'Validator',
+    status: 'Active',
+    ipAddress: '192.168.1.16',
+    clientVersion: 'Besu/v24.1.0',
+    uptime: '8d 14h 55m',
+    enodeUrl: 'enode://yza444...@192.168.1.16:30303',
+    metrics: { cpu: 35, ram: 48, disk: 30, peersHistory: generatePeersHistory() },
+    config: '',
+    position: { x: 600, y: 300 },
   },
   {
     id: 'rpc-1',
@@ -115,7 +167,7 @@ const initialNodes: NetworkNode[] = [
     enodeUrl: 'enode://jkl012...@192.168.1.20:30303',
     metrics: { cpu: 28, ram: 35, disk: 45, peersHistory: generatePeersHistory() },
     config: '',
-    position: { x: 600, y: 150 },
+    position: { x: 800, y: 200 },
   },
   {
     id: 'bootnode-1',
@@ -128,7 +180,7 @@ const initialNodes: NetworkNode[] = [
     enodeUrl: 'enode://mno345...@192.168.1.5:30303',
     metrics: { cpu: 12, ram: 25, disk: 10, peersHistory: generatePeersHistory() },
     config: '',
-    position: { x: 600, y: 300 },
+    position: { x: 350, y: 200 },
   },
 ];
 
@@ -138,12 +190,27 @@ initialNodes.forEach(node => {
 });
 
 const initialConnections: NodeConnection[] = [
+  // Bootnode connects to all validators
+  { id: 'boot-v1', source: 'bootnode-1', target: 'validator-1', animated: true },
+  { id: 'boot-v2', source: 'bootnode-1', target: 'validator-2', animated: true },
+  { id: 'boot-v3', source: 'bootnode-1', target: 'validator-3', animated: false },
+  { id: 'boot-v4', source: 'bootnode-1', target: 'validator-4', animated: true },
+  { id: 'boot-v5', source: 'bootnode-1', target: 'validator-5', animated: true },
+  { id: 'boot-v6', source: 'bootnode-1', target: 'validator-6', animated: true },
+  { id: 'boot-v7', source: 'bootnode-1', target: 'validator-7', animated: true },
+  // Validator mesh connections
   { id: 'e1-2', source: 'validator-1', target: 'validator-2', animated: true },
-  { id: 'e1-3', source: 'validator-1', target: 'validator-3', animated: false },
   { id: 'e2-3', source: 'validator-2', target: 'validator-3', animated: false },
-  { id: 'e1-rpc', source: 'validator-1', target: 'rpc-1', animated: true },
-  { id: 'e2-rpc', source: 'validator-2', target: 'rpc-1', animated: true },
-  { id: 'e1-boot', source: 'validator-1', target: 'bootnode-1', animated: true },
+  { id: 'e4-5', source: 'validator-4', target: 'validator-5', animated: true },
+  { id: 'e6-7', source: 'validator-6', target: 'validator-7', animated: true },
+  { id: 'e2-4', source: 'validator-2', target: 'validator-4', animated: true },
+  { id: 'e5-3', source: 'validator-5', target: 'validator-3', animated: false },
+  { id: 'e1-7', source: 'validator-1', target: 'validator-7', animated: true },
+  // RPC connects to some validators
+  { id: 'rpc-v6', source: 'rpc-1', target: 'validator-6', animated: true },
+  { id: 'rpc-v7', source: 'rpc-1', target: 'validator-7', animated: true },
+  { id: 'rpc-v4', source: 'rpc-1', target: 'validator-4', animated: true },
+  // RPC to bootnode
   { id: 'erpc-boot', source: 'rpc-1', target: 'bootnode-1', animated: true },
 ];
 
