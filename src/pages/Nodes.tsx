@@ -45,34 +45,31 @@ const Nodes = () => {
             </div>
           </motion.header>
 
-          {/* Main Content: Topology + Inspector */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
-            {/* Network Topology Map - 60% */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 }}
-              className="lg:col-span-3 h-[450px]"
-            >
-              <NetworkTopology
-                nodes={nodes}
-                connections={connections}
-                selectedNodeId={selectedNode?.id || null}
-                onSelectNode={selectNode}
-                onNodePositionChange={updateNodePosition}
-              />
-            </motion.div>
+          {/* Network Topology Map - Full Width */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="h-[500px] mb-6"
+          >
+            <NetworkTopology
+              nodes={nodes}
+              connections={connections}
+              selectedNodeId={selectedNode?.id || null}
+              onSelectNode={selectNode}
+              onNodePositionChange={updateNodePosition}
+            />
+          </motion.div>
 
-            {/* Node Inspector - 40% */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="lg:col-span-2 h-[450px]"
-            >
-              <NodeInspector node={selectedNode} onControlNode={controlNode} />
-            </motion.div>
-          </div>
+          {/* Node Inspector - Below Topology */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mb-6"
+          >
+            <NodeInspector node={selectedNode} onControlNode={controlNode} />
+          </motion.div>
 
           {/* Nodes Summary Table */}
           <NodesSummaryTable
