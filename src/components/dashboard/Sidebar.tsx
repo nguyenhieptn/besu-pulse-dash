@@ -11,7 +11,7 @@ interface SidebarProps {
 const navItems = [
   { id: 'home', icon: Home, label: 'Dashboard', path: '/' },
   { id: 'nodes', icon: Server, label: 'Nodes', path: '/nodes' },
-  { id: 'users', icon: Users, label: 'Users', path: '/users' },
+  { id: 'users', icon: Users, label: 'Accounts', path: '/accounts' },
   { id: 'transactions', icon: ArrowLeftRight, label: 'Transactions', path: '/transactions' },
   { id: 'settings', icon: Settings, label: 'Settings', path: '/settings' },
 ];
