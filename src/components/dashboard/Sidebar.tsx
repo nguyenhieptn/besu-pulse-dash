@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Home, Server, Users, ArrowLeftRight, Settings, Activity } from 'lucide-react';
+import { Home, Server, Users, ArrowLeftRight, Settings, Activity, Globe } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
@@ -12,6 +12,7 @@ const navItems = [
   { id: 'home', icon: Home, label: 'Dashboard', path: '/' },
   { id: 'nodes', icon: Server, label: 'Nodes', path: '/nodes' },
   { id: 'users', icon: Users, label: 'Accounts', path: '/accounts' },
+  { id: 'rpc', icon: Globe, label: 'RPC Access', path: '/rpc-access' },
   { id: 'transactions', icon: ArrowLeftRight, label: 'Transactions', path: '/transactions' },
   { id: 'settings', icon: Settings, label: 'Settings', path: '/settings' },
 ];
